@@ -7,6 +7,7 @@ import NavBarLeft from "./components/NavBarLeft";
 
 import { NavBarTop } from "./components/NavBarTop";
 import { ResponsiveTailwind } from "./components/ResponsiveTailwind";
+// https://www.youtube.com/watch?v=tcK38Simjaw&list=PLseEp7p6EwiYMnWrUp0fNP8OTh1mc8SCx&index=5
 
 function App() {
   return (
@@ -14,9 +15,9 @@ function App() {
       {/* <NavBarLeft /> */}
       {/* <NavBarTop /> */}
       {/* <DesingsTailwind /> */}
-      <GridTailwind />
+      {/* <GridTailwind /> */}
       {/* <GridTailwindDesign /> */}
-      {/* <ResponsiveTailwind /> */}
+      <ResponsiveTailwind />
       {/* <Button3D /> */}
     </>
   );
