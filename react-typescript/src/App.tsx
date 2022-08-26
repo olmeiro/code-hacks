@@ -1,6 +1,7 @@
 import { Counter } from "./components/Counter"
 import { Usuario } from "./components/Usuario"
 import { TimeFather } from './components/TimeFather'
+import { ContadorReducer } from './components/ContadorReducer'
 
 function App() {
 
@@ -17,6 +18,11 @@ function App() {
      <hr/>
 
      <TimeFather />
+
+     <hr/>
+
+      <h3>Contador Reducer</h3>
+     <ContadorReducer />
 
     </>
   )
