@@ -61,7 +61,7 @@ export const NavBarTop = () => {
                 </a>
               </div>
               {/* primary nav */}
-              <div div className="hidden md:flex flex items-center space-x-1">
+              <div div className="hidden md:flex items-center space-x-1">
                 <a
                   className="py-5 px-2 text-gray-600 hover:text-gray-900"
                   href="#"
@@ -118,12 +118,27 @@ export const NavBarTop = () => {
         {/* mobile menu */}
         <div 
           ref={menuMobile}
-          className="hidden md:hidden">
+          className="hidden md:hidden absolute bg-gray-100">
           <a className="block py-2 px-4 text-sm hover:bg-gray-200" href="#">
             Features
           </a>
           <a className="block py-2 px-4 text-sm hover:bg-gray-200" href="#">
             Pricing
+          </a>
+          <a className="block py-2 px-4 text-sm hover:bg-gray-200" href="#">
+            Contact
+          </a>
+          <a className="block py-2 px-4 text-sm hover:bg-gray-200" href="#">
+            Subscribe
+          </a>
+          <a className="block py-2 px-4 text-sm hover:bg-gray-200" href="#">
+            Subscribe
+          </a>
+          <a className="block py-2 px-4 text-sm hover:bg-gray-200" href="#">
+            Subscribe
+          </a>
+          <a className="block py-2 px-4 text-sm hover:bg-gray-200" href="#">
+            Subscribe another special option
           </a>
         </div>
       </nav>
