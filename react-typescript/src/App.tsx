@@ -2,6 +2,8 @@ import { Counter } from "./components/Counter"
 import { Usuario } from "./components/Usuario"
 import { TimeFather } from './components/TimeFather'
 import { ContadorReducer } from './components/ContadorReducer'
+import { FormHook, FormWithoutHook } from "./components/FormWithoutHook"
+import { FormWitHook } from "./components/FormWithHook"
 
 function App() {
 
@@ -21,8 +23,16 @@ function App() {
 
      <hr/>
 
-      <h3>Contador Reducer</h3>
+      <h3>Contador Reducer.</h3>
      <ContadorReducer />
+
+     <h2>Form without hook</h2>
+     <hr/>
+      <FormWithoutHook />
+
+      <h2>Form with hooks</h2>
+     <hr/>
+      <FormWitHook />
 
     </>
   )
