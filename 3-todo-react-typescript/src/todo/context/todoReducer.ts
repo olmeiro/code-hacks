@@ -5,6 +5,7 @@ type TodoAction =
   | { type: 'toggleTodo', payload: {id: string} }
 
 export const todoReducer = (state: TodoState, action:TodoAction ): TodoState => {
+  console.log({action})
   switch (action.type) {
     case 'addTodo':
       return {
@@ -14,7 +15,12 @@ export const todoReducer = (state: TodoState, action:TodoAction ): TodoState => 
     case 'toggleTodo':
       return {
         ...state,
-        
+        todos: state.todos.map( ({...todo}) => {
+          if(todo.id === action.payload.id) {
+            todo.completed = !todo.completed
+          }
+          return todo
+        })
       }
     
   
