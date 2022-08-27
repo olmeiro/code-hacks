@@ -7,6 +7,7 @@ import NavBarLeft from "./components/NavBarLeft";
 
 import { NavBarTop } from "./components/NavBarTop";
 import { ResponsiveTailwind } from "./components/ResponsiveTailwind";
+import { ToggleButton } from "./components/ToggleButton";
 // https://www.youtube.com/watch?v=tcK38Simjaw&list=PLseEp7p6EwiYMnWrUp0fNP8OTh1mc8SCx&index=5
 
 function App() {
@@ -18,7 +19,8 @@ function App() {
       {/* <GridTailwind /> */}
       {/* <GridTailwindDesign /> */}
       {/* <ResponsiveTailwind /> */}
-      <Button3D />
+      {/* <Button3D /> */}
+      <ToggleButton />
     </>
   );
 }
