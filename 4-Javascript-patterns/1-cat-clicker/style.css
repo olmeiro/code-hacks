@@ -19,6 +19,8 @@ main > div{
 
 img {
   width: 260px;
+  height: 260px;
+  object-fit:containt;
   border-radius: 5px
 }
 
@@ -37,4 +39,8 @@ h2 {
   padding:4px;
   width: 100%;
   border-radius: 5px
+}
+
+.areaClick {
+  background-color: #FF2442;
 }

@@ -1,24 +1,35 @@
 // my code
 
-const nameCats = ["Dubby", "Chal"];
-const imagesCats = [
-  "./assets/cat.jpg",
-  "./assets/cat2.jpg",
-  "./assets/cat3.jpg",
-];
-
 const Cats = [
   {
+    id:1,
     name: "Dubby",
     image: "./assets/cat.jpg",
+    count: 0
   },
   {
+    id:2,
     name: "Chal",
     image: "./assets/cat2.jpg",
+    count: 0
   },
   {
+    id:3,
     name: "Bum",
     image: "./assets/cat3.jpg",
+    count: 0
+  },
+  {
+    id:4,
+    name: "Tony",
+    image: "./assets/cat4.jpg",
+    count: 0
+  },
+  {
+    id:5,
+    name: "Spicy",
+    image: "./assets/cat5.jpg",
+    count: 0
   },
 ];
 
@@ -36,9 +47,45 @@ const Cats = [
 const main = document.getElementById("root");
 
 Cats.forEach((cat, idx) => {
+  buildCard(cat, idx, main, 'card')
+});
+
+const catImages = document.querySelectorAll("img");
+
+catImages.forEach((cat, idx) => {
+  cat.addEventListener("click", () => {
+    const spanToShowClicks = document.querySelectorAll(`.span-cat${idx + 1}`);
+    Cats[idx].count = Cats[idx].count + 1;
+    spanToShowClicks.forEach(span => {
+      span.textContent = Cats[idx].count
+    })
+  });
+});
+
+const namesCatToListen = document.querySelectorAll('.name_cat')
+
+
+namesCatToListen.forEach((name, idx) => {
+  name.addEventListener('click', () => {
+    let cardClicked = document.querySelector('.cardClicked')
+    console.log(cardClicked)
+    if(cardClicked !== null){
+      cardClicked.remove()
+    }
+    
+    let area = document.querySelector('.areaClick')
+    let cat = Cats[idx];
+    buildCard(cat, idx, area, 'cardClicked')
+  })
+})
+
+
+// functions:
+function buildCard (cat, idx, root, classDiv) {
   const { name, image } = cat;
 
   const div = document.createElement("div");
+  div.className = classDiv
 
   const title = document.createElement("h2");
   title.textContent = "NAME:";
@@ -58,7 +105,7 @@ Cats.forEach((cat, idx) => {
 
   const spanClicks = document.createElement("span");
   spanClicks.className = `span-cat${idx + 1}`;
-  spanClicks.textContent = 0;
+  spanClicks.textContent = cat.count;
 
   paragraphClics.append(spanClicks);
 
@@ -68,19 +115,5 @@ Cats.forEach((cat, idx) => {
   div.appendChild(paragraphClics);
   div.appendChild(spanClicks);
 
-  main.append(div);
-});
-
-let countCat1 = 0;
-let countCat2 = 0;
-
-const catImages = document.querySelectorAll("img");
-
-catImages.forEach((cat, idx) => {
-  cat.addEventListener("click", (e) => {
-    const spanToShowClicks = document.querySelector(`.span-cat${idx + 1}`);
-    let countClicks = parseInt(spanToShowClicks.innerHTML);
-    countClicks = countClicks + 1;
-    spanToShowClicks.textContent = countClicks;
-  });
-});
+  root.append(div);
+}
