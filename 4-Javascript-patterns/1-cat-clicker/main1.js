@@ -121,7 +121,8 @@ const view = {
   },
 
   buildCard: function (cat, idx, root, classDiv) {
-    const { name, image } = cat[0];
+    const { name, image, count } = cat[0];
+
     const div = document.createElement("div");
     div.className = classDiv;
 
@@ -144,7 +145,7 @@ const view = {
 
     const spanClicks = document.createElement("span");
     spanClicks.className = `span-cat`;
-    spanClicks.textContent = cat.count;
+    spanClicks.textContent = count;
 
     paragraphClics.append(spanClicks);
 
