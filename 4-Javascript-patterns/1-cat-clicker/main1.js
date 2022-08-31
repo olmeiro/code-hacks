@@ -42,7 +42,7 @@ const data = [
 // octopus
 const octopus = {
   init: function () {
-    view.init();
+    viewList.init();
   },
 
   getCats: function () {
@@ -56,6 +56,9 @@ const octopus = {
   },
 
   incrementCountCat: function (id) {
+    if(id === -1){
+      id = 0 
+    }
     const catIncrement = data[id];
     catIncrement.count = catIncrement.count + 1;
     return catIncrement;
@@ -63,41 +66,67 @@ const octopus = {
 };
 
 // views
-const view = {
+const viewList = {
   init: function () {
-    const divList = document.getElementById("list-cats");
-    const title = document.createElement("h2");
-    title.textContent = "Cat List:";
+    this.divList = document.getElementById("list-cats");
 
-    const list = document.createElement("ul");
+    this.title = document.createElement("h2");
+    this.title.textContent = "Cat List:";
+    this.list = document.createElement("ul");
 
-    divList.appendChild(title);
-    divList.appendChild(list);
-    const cats = octopus.getCats();
-    cats.forEach((cat, idx) => {
-      this.buildListCats(cat, idx, list, "item-cat");
-    });
+    this.divList.appendChild(this.title);
+    this.divList.appendChild(this.list);
 
-    const toListen = document.querySelectorAll(".item-cat");
-    this.listenEventName(toListen);
+    this.render()
   },
 
   listenEventName: function (toListen) {
     toListen.forEach((item) => {
       item.addEventListener("click", (e) => {
         const areaCard = document.querySelector(".area-card");
-        let cardClicked = document.querySelector(".card-to-show");
+        const cardClicked = document.querySelector(".card-to-show");
 
         if (cardClicked !== null) {
           cardClicked.remove();
         }
+
         const idCat = e.target.getAttribute("cat-id");
+
         const catToShow = octopus.getCatById(idCat);
-        this.buildCard(catToShow, idCat, areaCard, "card-to-show");
-        this.listenEventImage();
+
+        viewCard.buildCard(catToShow, idCat, areaCard, "card-to-show");
+        
       });
     });
   },
+
+  buildListCats: function (cat, idx, root, classDiv) {
+    const { name } = cat;
+    const itemCat = document.createElement("li");
+
+    itemCat.textContent = name;
+    itemCat.setAttribute("cat-id", idx + 1);
+    itemCat.className = classDiv;
+
+    root.appendChild(itemCat);
+  },
+
+  render: function () {
+    const cats = octopus.getCats();
+
+    cats.forEach((cat, idx) => {
+      this.buildListCats(cat, idx, this.list, "item-cat");
+    });
+    const areaCard = document.querySelector(".area-card");
+    viewCard.buildCard([cats[0]],0, areaCard, "card-to-show")
+
+    // listen event click name:
+    const toListen = document.querySelectorAll(".item-cat");
+    this.listenEventName(toListen);
+  },
+};
+
+const viewCard = {
 
   listenEventImage: function () {
     const grabImage = document.querySelector(".image-cat");
@@ -107,17 +136,6 @@ const view = {
       const dataCat = octopus.incrementCountCat(parseInt(idImage) - 1);
       spanCard.textContent = dataCat.count;
     });
-  },
-
-  buildListCats: function (cat, idx, root, classDiv) {
-    const { name } = cat;
-
-    const itemCat = document.createElement("li");
-    itemCat.textContent = name;
-    itemCat.setAttribute("cat-id", idx + 1);
-    itemCat.className = classDiv;
-
-    root.appendChild(itemCat);
   },
 
   buildCard: function (cat, idx, root, classDiv) {
@@ -156,15 +174,8 @@ const view = {
     div.appendChild(spanClicks);
 
     root.append(div);
-  },
-
-  render: function () {
-    let cardClicked = document.querySelector(".card-to-show");
-
-    if (cardClicked !== null) {
-      cardClicked.remove();
-    }
-  },
-};
+    this.listenEventImage();
+  }
+}
 
 octopus.init();
