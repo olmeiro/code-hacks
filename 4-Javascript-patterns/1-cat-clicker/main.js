@@ -1,5 +1,7 @@
 // my code
+// first solution
 
+// model
 const Cats = [
   {
     id:1,
@@ -33,16 +35,7 @@ const Cats = [
   },
 ];
 
-{
-  /* <div>
-        <h2>Cat Name:
-          <span class="name_cat">name1</span>
-        </h2>
-        <img id="cat-1" src="./assets/cat.jpg" alt="">
-        <p>number of clicks:</p>
-        <span class="span-cat1"></span>
-      </div> */
-}
+// octopus:
 
 const main = document.getElementById("root");
 
@@ -80,7 +73,7 @@ namesCatToListen.forEach((name, idx) => {
 })
 
 
-// functions:
+// Views:
 function buildCard (cat, idx, root, classDiv) {
   const { name, image } = cat;
 

@@ -10,12 +10,23 @@ main {
   height: auto;
 }
 
-main > div{
+#list-cats {
   background-color: #FFEDDA;
   width: 260px;
   padding: 16px;
   border-radius: 5px;
 }
+
+ul > li {
+  list-style-type: none;
+  background-color: #FFB830;
+  padding:12px;
+  border-radius: 5px;
+  text-align: center;
+  margin: 5px
+}
+
+
 
 img {
   width: 260px;
@@ -37,7 +48,7 @@ h2 {
 .name_cat {
   background-color: #FFB830;
   padding:4px;
-  width: 100%;
+  /* width: 100%; */
   border-radius: 5px
 }
 
