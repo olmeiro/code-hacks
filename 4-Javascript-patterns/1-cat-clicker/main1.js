@@ -1,43 +1,46 @@
 // second solution cat clicker
 
 // model
-const data = [
-  {
-    id: 1,
-    name: "Dubby",
-    image: "./assets/cat.jpg",
-    available: true,
-    count: 0,
-  },
-  {
-    id: 2,
-    name: "Chal",
-    image: "./assets/cat2.jpg",
-    available: true,
-    count: 0,
-  },
-  {
-    id: 3,
-    name: "Bum",
-    image: "./assets/cat3.jpg",
-    available: true,
-    count: 0,
-  },
-  {
-    id: 4,
-    name: "Tony",
-    image: "./assets/cat4.jpg",
-    available: true,
-    count: 0,
-  },
-  {
-    id: 5,
-    name: "Spicy",
-    image: "./assets/cat5.jpg",
-    available: true,
-    count: 0,
-  },
-];
+const data = {
+  currentCat: null,
+  cats: [
+    {
+      id: 1,
+      name: "Dubby",
+      image: "./assets/cat.jpg",
+      available: true,
+      count: 0,
+    },
+    {
+      id: 2,
+      name: "Chal",
+      image: "./assets/cat2.jpg",
+      available: true,
+      count: 0,
+    },
+    {
+      id: 3,
+      name: "Bum",
+      image: "./assets/cat3.jpg",
+      available: true,
+      count: 0,
+    },
+    {
+      id: 4,
+      name: "Tony",
+      image: "./assets/cat4.jpg",
+      available: true,
+      count: 0,
+    },
+    {
+      id: 5,
+      name: "Spicy",
+      image: "./assets/cat5.jpg",
+      available: true,
+      count: 0,
+    },
+  ],
+};
 
 // octopus
 const octopus = {
@@ -46,22 +49,49 @@ const octopus = {
   },
 
   getCats: function () {
-    const catsAvailable = data.filter((cat) => cat.available === true);
+    const catsAvailable = data.cats.filter((cat) => cat.available === true);
     return catsAvailable;
   },
 
   getCatById: function (id) {
-    const catToGrab = data.filter((cat) => cat.id === parseInt(id));
+    const catToGrab = data.cats.filter((cat) => cat.id === parseInt(id));
     return catToGrab;
   },
 
-  incrementCountCat: function (id) {
-    if(id === -1){
-      id = 0 
+  getCurrentCat: function (){
+    let current = data.currentCat
+    if( current === null){
+      current = 1
     }
-    const catIncrement = data[id];
-    catIncrement.count = catIncrement.count + 1;
+    return current
+  },
+
+  setCurrentCat: function (id){
+    data.currentCat = id
+  },
+
+  incrementCountCat: function (id) {
+    const catId = parseInt(id)
+    const [catToIncrementCounter] = this.getCatById(catId)
+    
+    catToIncrementCounter.count = catToIncrementCounter.count + 1
+    let catIncrement = catToIncrementCounter.count
     return catIncrement;
+  },
+
+  changeData: function (dataForm, idCurrentCat) {
+    console.log("idCurrentCat", idCurrentCat)
+
+    const {count, image, name } = dataForm
+
+    let catToUpdate = this.getCatById(idCurrentCat)
+    catToUpdate[0].name = name
+    catToUpdate[0].image = image
+    catToUpdate[0].count = parseInt(count)
+
+    const areaCard = document.querySelector('.area-card')
+    viewList.resetCard()
+    viewCard.buildCard(catToUpdate,idCurrentCat,areaCard, "card-to-show")
   },
 };
 
@@ -77,25 +107,26 @@ const viewList = {
     this.divList.appendChild(this.title);
     this.divList.appendChild(this.list);
 
-    this.render()
+    this.render();
   },
 
   listenEventName: function (toListen) {
     toListen.forEach((item) => {
       item.addEventListener("click", (e) => {
         const areaCard = document.querySelector(".area-card");
-        const cardClicked = document.querySelector(".card-to-show");
+        
+        this.resetCard()
 
-        if (cardClicked !== null) {
-          cardClicked.remove();
-        }
-
+        // const idCat = e.target.getAttribute("cat-id");
         const idCat = e.target.getAttribute("cat-id");
 
+        octopus.setCurrentCat(parseInt(idCat))
+        console.log(octopus.getCurrentCat())
+
         const catToShow = octopus.getCatById(idCat);
+        // console.log("catToShow", catToShow)
 
         viewCard.buildCard(catToShow, idCat, areaCard, "card-to-show");
-        
       });
     });
   },
@@ -111,6 +142,14 @@ const viewList = {
     root.appendChild(itemCat);
   },
 
+  resetCard: function() {
+    const cardClicked = document.querySelector(".card-to-show");
+
+    if (cardClicked !== null) {
+      cardClicked.remove();
+    }
+  },
+
   render: function () {
     const cats = octopus.getCats();
 
@@ -118,7 +157,8 @@ const viewList = {
       this.buildListCats(cat, idx, this.list, "item-cat");
     });
     const areaCard = document.querySelector(".area-card");
-    viewCard.buildCard([cats[0]],0, areaCard, "card-to-show")
+    viewCard.buildCard([cats[0]], 0, areaCard, "card-to-show");
+    viewAdmin.adminEvent();
 
     // listen event click name:
     const toListen = document.querySelectorAll(".item-cat");
@@ -126,19 +166,57 @@ const viewList = {
   },
 };
 
-const viewCard = {
+const viewAdmin = {
+  adminEvent: function () {
+    const btnAdmin = document.querySelector(".btn-admin");
 
+    btnAdmin.addEventListener("click", () => {
+      const areaAdmin = document.querySelector(".area-admin_form");
+      const divForm = document.querySelector(".area_admin_form-form");
+      areaAdmin.style.display = "flex";
+
+      const currentCatId = octopus.getCurrentCat()
+      const [dataCat] = octopus.getCatById(parseInt(currentCatId))
+
+      const [id, name, url, clicks] = divForm;
+      id.value = dataCat.id;
+      name.value = dataCat.name;
+      url.value = dataCat.image;
+      clicks.value = dataCat.count;
+
+      divForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const data = Object.fromEntries(new FormData(e.target));
+        octopus.changeData(data, currentCatId);
+      });
+
+      this.cancelEvent();
+    });
+  },
+
+  cancelEvent: function () {
+    const btnCancel = document.querySelector(".btn-cancel");
+
+    btnCancel.addEventListener("click", () => {
+      const areaAdmin = document.querySelector(".area-admin_form");
+      areaAdmin.style.display = 'none'
+    });
+  },
+};
+
+const viewCard = {
   listenEventImage: function () {
     const grabImage = document.querySelector(".image-cat");
-    let idImage = grabImage.getAttribute("id");
+    const current = octopus.getCurrentCat()
     grabImage.addEventListener("click", () => {
       const spanCard = document.querySelector(".span-cat");
-      const dataCat = octopus.incrementCountCat(parseInt(idImage) - 1);
-      spanCard.textContent = dataCat.count;
+      const dataCat = octopus.incrementCountCat(current);
+      spanCard.textContent = dataCat;
     });
   },
 
   buildCard: function (cat, idx, root, classDiv) {
+    // console.log("cat", cat)
     const { name, image, count } = cat[0];
 
     const div = document.createElement("div");
@@ -175,7 +253,7 @@ const viewCard = {
 
     root.append(div);
     this.listenEventImage();
-  }
-}
+  },
+};
 
 octopus.init();
