@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/assets/favicon.ico" />
+  <link rel="stylesheet" href="./style.css">
+  <title>Cat Clicker</title>
+</head>
+<body>
+  <!-- https://colorhunt.co/palette/3db2ffffeddaffb830ff2442 -->
+  <!-- https://www.flickr.com/photos/poplinre/624175845/in/photostream/ -->
+  <main id="root">
+    <h1>Cat clicker app</h1>
+    <div id="list-cats"></div>
+    <div class="area-card"></div>
+    <div class="area-admin">
+      <button class="btn-admin">Admin</button>
+      <div class="area-admin_form">
+        <form action="" class="area_admin_form-form">
+          <input type="number" name="id" class="id-input">
+          <label for="name">Name</label>
+          <input type="text" name="name">
+
+          <label for="image">Image Url</label>
+          <input type="text" name="image">
+
+          <label for="clicks">Number clicks</label>
+          <input type="number" name="count">
+
+          <button type="button" class="btn-cancel">cancel</button>
+          <button type="submit" class="btn-send">send</button>
+        </form>
+      </div>
+    </div>
+  </main>
+  <script src="./main1.js"></script>
+</body>
+</html>

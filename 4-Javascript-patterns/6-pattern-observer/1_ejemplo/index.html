@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Observer pattern</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="./main.js"></script>
+</head>
+<body>
+  <main class="bg-gray-100 min-h-screen flex flex-col">
+    <h1 class="text-2xl text-center p-8">Patron Observador en Javascript.</h1>
+    <div class="bg-gray-100 w-full flex flex-col p-8">
+      <label class="text-lg font-semibold" for="">Descripcion</label>
+      <input class="p-1 rounded-md" type="text" id="txtDescription">
+     
+      <label class="text-lg font-semibold" for="">Total</label>
+      <input class="p-1 rounded-md" type="text" id="txtAmount">
+      <button class="bg-gray-200 p-2 mt-4 rounded-md hover:bg-gray-300" onclick="add()">Agregar</button>
+    </div>
+    
+    <div class="w-full bg-gray-400 flex flex-col justify-center items-center p-8" id="list"></div>
+    
+    <div class="flex flex-row justify-around items-end">
+      <label class="text-lg font-bold" for="">Total:</label>
+      <span id="spanTotal">0</span>
+    
+      <label class="text-lg font-bold" for="">Cantidad</label>
+      <span id="spanCount">0</span>
+    </div>
+  </main>
+  
+  <script>
+    let itemsSubject = new ItemSubject();
+    let listObserver = new ListObserver(document.getElementById('list'));
+    let totalObserver = new TotalObserver(document.getElementById('spanTotal'));
+
+    let dynamicObserver = new DynamicObserver(document.getElementById('spanCount'), (subject, tag) => {
+        tag.innerHTML = subject.items.length;
+
+    });
+
+    itemsSubject.subscribe(listObserver)
+    itemsSubject.subscribe(totalObserver)
+    itemsSubject.subscribe(dynamicObserver)
+
+    function add() {
+      let description = document.getElementById('txtDescription').value
+      let amount = document.getElementById('txtAmount').value
+
+      itemsSubject.notify({
+        description: description,
+        amount: amount
+      })
+    }
+
+
+    // itemsSubject.unsusbcribe(dynamicObserver) // para que cantidad ya no reciba llamados
+
+    // itemsSubject.notify({
+    //   description: 'Cerveza',
+    //   amount: 40
+    // })
+    
+    // itemsSubject.notify({
+    //   description: 'Cerveza',
+    //   amount: 55
+    // })
+  </script>
+</body>
+</html>

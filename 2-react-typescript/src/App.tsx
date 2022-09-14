@@ -2,7 +2,7 @@ import { Counter } from "./components/Counter"
 import { Usuario } from "./components/Usuario"
 import { TimeFather } from './components/TimeFather'
 import { ContadorReducer } from './components/ContadorReducer'
-import { FormHook, FormWithoutHook } from "./components/FormWithoutHook"
+import { FormWithoutHook } from "./components/FormWithoutHook"
 import { FormWitHook } from "./components/FormWithHook"
 
 function App() {
