@@ -4,13 +4,22 @@ import notImage from "../assets/no-image.jpg";
 
 import { useProduct } from "../hooks/useProduct";
 
-export const ProductCard = () => {
+interface Props {
+  product: Product
+}
+
+interface Product  {
+  id: string,
+  title: string,
+  img?: string
+}
+
+export const ProductCard = ({ product }: Props) => {
   const { counter, increaseBy } = useProduct()
   return (
     <div className={styles.productCard}>
-      <img className={styles.productImg} src={coffeeMug} />
-      {/* <img className={styles.productImg} src={notImage} /> */}
-      <span className={styles.productDescription}>Coffe mug</span>
+      <img className={styles.productImg} src={product.img ? product.img : notImage} />
+      <span className={styles.productDescription}>{product.title}</span>
 
       <div className={styles.buttonsContainer}>
         <button className={styles.buttonMinus} onClick={() => increaseBy(-1)}>
