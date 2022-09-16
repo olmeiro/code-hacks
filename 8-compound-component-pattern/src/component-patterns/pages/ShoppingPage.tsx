@@ -21,29 +21,6 @@ export const ShoppingPage = () => {
       >
 
       {/* *** primer forma: */}
-      {/* <ProductCard product={product}> 
-        <ProductImage />
-        <ProductTitle title='Café'/>
-        <ProductButtons 
-          counter={0} 
-          increaseBy={function (value: number): void {
-            throw new Error('Function not implemented.');
-          } } 
-        />
-      </ProductCard> */} 
-     
-     {/* ***Segunda forma: */}
-      {/* <ProductCard product={product}> 
-        <ProductCard.Image />
-        <ProductCard.Title title='Café'/>
-        <ProductCard.Buttons 
-          counter={0} 
-          increaseBy={function (value: number): void {
-            throw new Error('Function not implemented.');
-          } } 
-        />
-      </ProductCard> */}
-
       {/* *** Pasando la info del HOC a los hijos */}
       <ProductCard product={product}> 
         <ProductImage />
@@ -51,11 +28,12 @@ export const ShoppingPage = () => {
         <ProductButtons />
       </ProductCard>
 
-      {/* <ProductCard product={product}> 
+     {/* ***Segunda forma: */}
+      <ProductCard product={product}> 
         <ProductCard.Image />
         <ProductCard.Title />
         <ProductCard.Buttons />
-      </ProductCard> */}
+      </ProductCard>
       </div >
     </div>
   )
