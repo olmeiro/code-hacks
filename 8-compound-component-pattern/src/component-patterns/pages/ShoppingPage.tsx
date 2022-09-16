@@ -1,4 +1,4 @@
-import { ProductButtons, ProductCard, ProductImage, ProductTitle } from '../components/ProductCard';
+import { ProductButtons, ProductCard, ProductImage, ProductTitle } from '../components';
 
 const product = {
   id: '1',
@@ -46,25 +46,16 @@ export const ShoppingPage = () => {
 
       {/* *** Pasando la info del HOC a los hijos */}
       <ProductCard product={product}> 
-        <ProductCard.Image />
-        <ProductCard.Title title='Café mug'/>
-        <ProductCard.Buttons />
+        <ProductImage />
+        <ProductTitle title='Café mug'/>
+        <ProductButtons />
       </ProductCard>
-      <ProductCard product={product}> 
+
+      {/* <ProductCard product={product}> 
         <ProductCard.Image />
         <ProductCard.Title />
         <ProductCard.Buttons />
-      </ProductCard>
-      <ProductCard product={product}> 
-        <ProductCard.Image />
-        <ProductCard.Title title='otro titulo'/>
-        <ProductCard.Buttons />
-      </ProductCard>
-      <ProductCard product={product}> 
-        <ProductCard.Image />
-        <ProductCard.Title title='Café mug 3'/>
-        <ProductCard.Buttons />
-      </ProductCard>
+      </ProductCard> */}
       </div >
     </div>
   )
