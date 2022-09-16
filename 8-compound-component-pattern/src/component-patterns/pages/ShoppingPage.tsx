@@ -47,13 +47,23 @@ export const ShoppingPage = () => {
       {/* *** Pasando la info del HOC a los hijos */}
       <ProductCard product={product}> 
         <ProductCard.Image />
-        <ProductCard.Title title='Café'/>
-        <ProductCard.Buttons 
-          counter={0} 
-          increaseBy={function (value: number): void {
-            throw new Error('Function not implemented.');
-          } } 
-        />
+        <ProductCard.Title title='Café mug'/>
+        <ProductCard.Buttons />
+      </ProductCard>
+      <ProductCard product={product}> 
+        <ProductCard.Image />
+        <ProductCard.Title />
+        <ProductCard.Buttons />
+      </ProductCard>
+      <ProductCard product={product}> 
+        <ProductCard.Image />
+        <ProductCard.Title title='otro titulo'/>
+        <ProductCard.Buttons />
+      </ProductCard>
+      <ProductCard product={product}> 
+        <ProductCard.Image />
+        <ProductCard.Title title='Café mug 3'/>
+        <ProductCard.Buttons />
       </ProductCard>
       </div >
     </div>

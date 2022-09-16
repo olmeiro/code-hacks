@@ -1,10 +1,10 @@
-import { ReactElement } from "react";
+import { createContext, ReactElement, useContext } from "react";
 
 import styles from "../styles/styles.module.css";
 import coffeeMug from "../../../public/coffee-mug.png";
 import notImage from "../assets/no-image.jpg";
 
-import { useProduct } from "../hooks/useProduct";
+import { useProduct } from '../hooks/useProduct';
 
 interface Props {
   product: Product;
@@ -17,26 +17,50 @@ interface Product  {
   img?: string
 }
 
+// context api:
+
+interface ProductContextProps {
+  counter: number; 
+  increaseBy: (value: number) => void,
+  product: Product
+
+}
+
+const ProductContext =createContext({} as ProductContextProps)
+const { Provider } = ProductContext
+
 // components
 
-export const ProductImage = ({img = ''}) => { // el string hace la img opcional-un string vacio para un ternario no tiene valor
+export const ProductImage = ({img = ''}) => {
+  const {product} = useContext(ProductContext)
+
+  let imgToShow:string
+
+  if(img){
+    imgToShow = img
+  }else if(product.img) {
+    imgToShow = product.img
+  }else{
+    imgToShow = notImage
+  }
+
   return (
-    <img className={styles.productImg} src={img ? img : notImage} alt='Product' />
+    <img className={styles.productImg} src={ imgToShow } alt='Product' />
   )
 }
 
-export const ProductTitle = ({ title}:{title:string}) => { // se obliga el titulo, si hay mas propiedades uso una interface
+export const ProductTitle = ({ title}:{title?:string}) => { // se obliga el titulo, si hay mas propiedades uso una interface
+  const {product} = useContext(ProductContext)
+
   return (
-    <span className={styles.productDescription}>{title}</span>
+    <span className={styles.productDescription}>
+      { title ? title : product.title}
+    </span>
   )
 }
 
-interface ProductButtonsProps {
-  counter: number,
-  increaseBy: (value: number) => void
-}
-
-export const ProductButtons = ({counter, increaseBy}: ProductButtonsProps) => {
+export const ProductButtons = () => {
+  const {increaseBy, counter} = useContext(ProductContext)
   return (
     <div className={styles.buttonsContainer}>
       <button className={styles.buttonMinus} onClick={() => increaseBy(-1)}>
@@ -53,15 +77,15 @@ export const ProductButtons = ({counter, increaseBy}: ProductButtonsProps) => {
 export const ProductCard = ({ children, product }: Props) => {
   const { counter, increaseBy } = useProduct()
   return (
-    <div className={styles.productCard}>
-      { children }
-      {/* <ProductImage img={product.img} />
-      <ProductTitle title={product.title} />
-      <ProductButtons 
-        counter={counter} 
-        increaseBy={increaseBy}       
-      /> */}
-    </div>
+    <Provider value={{
+      counter,
+      increaseBy,
+      product
+    }}>
+      <div className={styles.productCard}>
+        { children }
+      </div>
+    </Provider>
   );
 };
 
