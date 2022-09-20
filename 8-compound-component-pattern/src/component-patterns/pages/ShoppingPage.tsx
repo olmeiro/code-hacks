@@ -29,15 +29,15 @@ export const ShoppingPage = () => {
         className='bg-dark text-white'
       > 
         <ProductImage className='custom-image' />
-        <ProductTitle title='Café mug' className='text-bold'/>
+        <ProductTitle title='Café mug' className='text-bold' activeClass='active'/>
         <ProductButtons className='custom-buttons' />
       </ProductCard>
 
      {/* ***Segunda forma: */}
       <ProductCard product={product}> 
-        <ProductCard.Image />
-        <ProductCard.Title />
-        <ProductCard.Buttons />
+        <ProductCard.Image className='custom-image' />
+        <ProductCard.Title className='text-bold' activeClass='active' />
+        <ProductCard.Buttons className='custom-buttons' />
       </ProductCard>
       </div >
     </div>
