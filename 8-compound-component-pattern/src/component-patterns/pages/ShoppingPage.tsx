@@ -26,11 +26,11 @@ export const ShoppingPage = () => {
       {/* *** Pasando la info del HOC a los hijos */}
       <ProductCard 
         product={product}
-        className='bg-dark'
+        className='bg-dark text-white'
       > 
         <ProductImage className='custom-image' />
-        <ProductTitle title='Café mug' className='text-white text-bold'/>
-        <ProductButtons />
+        <ProductTitle title='Café mug' className='text-bold'/>
+        <ProductButtons className='custom-buttons' />
       </ProductCard>
 
      {/* ***Segunda forma: */}

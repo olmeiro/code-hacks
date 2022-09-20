@@ -19,5 +19,5 @@ export interface ProductCardHOCProps {
   ({ children, product }: ProductCardProps) : JSX.Element, // viene de Props de ProductCard
   Title: ({ title }: {title?: string;}) => JSX.Element,
   Image: ({ img }: {img?: string | undefined;}) => JSX.Element,
-  Buttons: () => JSX.Element
+  Buttons: ({ className }: { className?: string }) => JSX.Element
 }
