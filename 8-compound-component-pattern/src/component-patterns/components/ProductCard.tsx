@@ -1,4 +1,4 @@
-import { createContext, ReactElement } from "react";
+import { createContext, ReactElement, CSSProperties } from "react";
 
 import { useProduct } from '../hooks/useProduct';
 import { Product, ProductContextProps } from "../interfaces/interfaces";
@@ -12,9 +12,10 @@ export interface Props {
   product: Product;
   children?: ReactElement | ReactElement [];
   className?: string; // es opcional y string
+  style?: CSSProperties
 }
 
-export const ProductCard = ({ children, product, className }: Props) => {
+export const ProductCard = ({ children, product, className, style }: Props) => {
   const { counter, increaseBy } = useProduct()
   return (
     <Provider value={{
@@ -22,7 +23,10 @@ export const ProductCard = ({ children, product, className }: Props) => {
       increaseBy,
       product
     }}>
-      <div className={`${styles.productCard} ${className}`}>
+      <div 
+        className={`${styles.productCard} ${className}`}
+        style={style}
+        >
         { children }
       </div>
     </Provider>
