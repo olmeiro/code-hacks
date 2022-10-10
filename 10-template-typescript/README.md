@@ -76,6 +76,83 @@ Con la extension Error Lens observamos las sugerencias de código.
 
 Los navegadores sólo reconocen Javascript, Node tampoco corre nativamente typescript.Lo que hacemos es transpilar nuestros archivos ts en tsc que los lleva a Vanilla JS.
 
+para traspilar un archivo:
+```
+npx tsc src/01-hello.ts
+```
+esto crea un nuevo archivo hello.js
 
+Cuando transpilamos demoTStoCompile.ts nos arroja errores por que se llevan a un ES3 por default, para definir que target queremos ejecutamos:
+
+```
+npx tsc src/demoTStoCompile.ts --target es5
+npx tsc src/demoTStoCompile.ts --target es6
+```
+
+Ahora sin problemas los transpila a versiones más nuevas.
+
+
+### dist
+
+esta carpeta será donde tendrán lugar nuestas traspilaciones:
+
+```
+npx tsc src/demoTStoCompile.ts --target es6 --outDir dist
+```
+
+Usando una expresion regular para todos los archivos:
+```
+npx tsc src/*.ts --target es6 --outDir dist
+```
+
+al ejecutar podemos tener este error:
+```
+error TS6053: File 'src/*.ts' not found.
+  The file is in the program because:
+    Root file specified for compilation
+```
+
+Se resuelve creando un archivo tsconfig.json.
+
+### Ahorrando trabajo:
+
+Configuramos el tsconfig.json:
+
+### Pasos:
+
+1. Posicionate en el directorio raíz de tu proyecto.
+2. Ejecutar el comando `npx tsc --init`.Esto creará el archivo **tsconfig.json.**
+3. Ejecutar el comando `npx tsc -p ./ -w`
+    1. Esto compilará en el mismo directorio todos tus archivos .ts
+    2. Para modificar el target o el destino de los archivos compilados, en el archivo tsconfig.json busca el flag “outDir” y modificala para que quede así: `"outDir": "./dist",`**.**
+
+Listo, ya tienes configurado lo necesario para seguir el curso tal cual (hasta el momento).
+
+**Nota:** El tsconfig ya viene configurado para compilar a ES6, en caso de que quieras cambiar, busca la línea “target” y modifícala con el valor que necesites.
+
+Si además del outDir que configuramos antes, configuramos el "rootDir: "./src", de ahora en mas vamos a poder compilar todos nuestros archivos a TypeScript con el siguiente comando:
+
+```
+npx tsc --watch
+```
+
+--wath hace que Typescript se quede escuchando los archivos.
+
+
+Luego de transpilados nuestros archivos ahora podemos ejecutarlos con node por ejemplo:
+
+```
+node dist/01-hello.js
+```
+
+# Qué es el tipado en Typescript:
+
+El tipado en TypeScript hace referencia a cómo declaramos una variable, necesitamos asignar el tipo de dato, conocido como type annotation, con esto evitamos mezclar distintos tipos de datos.
+
+En TypeScript, para el caso anterior, es similar solo que añadimos : y el tipo de dato de la variable, la cual sería number. A esto último se le llama type annotation o anotación de tipo:
+
+```
+const productPrice: number = 12;
+```
 
 
