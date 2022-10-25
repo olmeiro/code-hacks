@@ -1,0 +1,166 @@
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+   scroll-behavior: auto;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
+body {
+  background: #223;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.box {
+  background: blueviolet;
+  height: 200px;
+  width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 64px;
+}
+
+.bar {
+  background: black;
+  width: 100%;
+  height: 16px;
+  positon: absolute;
+  border-radius: 20px;
+  border: 0;
+
+  transition: all .5s;
+  transform-origin: left;
+}
+
+.box:hover > .bar-2 {
+  opacity: 0;
+}
+
+.box:hover  .bar-1 {
+  position: relative;
+  top: 35px;
+  width: 100%;
+  transform: rotate(45deg);
+}
+
+.box:hover  .bar-3 {
+  width:100%; 
+  position: relative;
+  top: -35px;
+  transform: rotate(-45deg);
+}
+
+
+/* button */
+.boton {
+  margin-top: 10px;
+  background: white;
+}
+
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 3rem;
+  height: 3rem;
+  border: 0;
+  background: transparent;
+  gap: .65rem;
+}
+
+button > div {
+  background: black;
+  height: 2px;
+  width: 100%;
+  border-radius: 5px;
+
+  transition: all 0.5s;
+  transform-origin: left;
+
+}
+
+
+button:hover div:first-child {
+  transform: rotate(45deg);
+}
+button:hover div:nth-child(2) {
+  opacity: 0;
+}
+button:hover div:last-child {
+  transform: rotate(-45deg);
+}

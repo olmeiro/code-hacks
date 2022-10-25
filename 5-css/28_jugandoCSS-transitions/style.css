@@ -1,0 +1,26 @@
+body {
+  background: #223;
+  color: white;
+}
+
+/* https://www.youtube.com/watch?v=jdGpehoFoWA */
+
+.box {
+  --size: 200px;
+  
+  /* los gradientes no se pueden transicionar, pero tenemos un truco */
+  background: linear-gradient(#000a, transparent), blueviolet;
+  width: var(--size);
+  height: var(--size);
+  transition: all 1s ease 2s;
+}
+
+
+.box:hover {
+  background: linear-gradient(#000a, transparent);
+  width: 225px;
+  height: 300px;
+  transition: all 2s;
+
+  transform: translate(200px, 0);
+}
